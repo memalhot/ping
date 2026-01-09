@@ -1,0 +1,34 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+
+parameters:
+  - name: PVC_NAME
+    required: true
+  - name: NAMESPACE
+    required: true
+  - name: PVC_SIZE
+    value: 20Gi
+    required: true
+  - name: RUN_NAME
+    required: true
+  - name: USER
+    required: true
+
+objects:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: ${PVC_NAME}
+      namespace: ${NAMESPACE}
+      labels:
+        app: ${PVC_NAME}
+        notebook-name: ${PVC_NAME}
+        ope-run: ${RUN_NAME}
+        opendatahub.io/dashboard: "true"
+        opendatahub.io/user: ${USER}
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: ${PVC_SIZE}
