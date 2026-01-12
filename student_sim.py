@@ -2,10 +2,8 @@ from playwright.sync_api import sync_playwright, Page, TimeoutError as PWTimeout
 import threading
 import time
 
-
 USER_DATA_DIR = "/home/memalhot/.pw-profile"  # create/use a dedicated dir
 workbench_urls = []
-
 
 # assume 10 nbs based on launch scripts
 urls = [f"https://notebook-{i}-mm-pingtest.apps.ocp-test.nerc.mghpcc.org/notebook/mm-pingtest/notebook-{i}/lab?" for i in range(1, 11)]
@@ -29,9 +27,6 @@ def bootstrap_login_and_save_state(login_url: str, state_path: str = "auth.json"
 
        context.storage_state(path=state_path)
        browser.close()
-
-
-
 
 def ensure_authed_via_github(page: Page) -> None:
    """
@@ -107,7 +102,7 @@ def main():
    for url in urls:
        t = threading.Thread(target=run_notebook, args=(url,))
        t.start()
-       time.sleep(2)
+       time.sleep(5)
        threads.append(t)
 
 
