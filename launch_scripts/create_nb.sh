@@ -19,7 +19,7 @@ oc project "${NAMESPACE}"
 
 for i in $(seq 1 10); do
   NOTEBOOK_NAME="notebook-${i}"
-  PVC_NAME="${NOTEBOOK_NAME}"   # IMPORTANT: matches claimName in nb.yaml
+  PVC_NAME="${NOTEBOOK_NAME}"
 
   echo "Applying PVC + Notebook for ${NOTEBOOK_NAME} (PVC=${PVC_NAME})..."
 
